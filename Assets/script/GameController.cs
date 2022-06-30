@@ -19,14 +19,13 @@ public class GameController : MonoBehaviour
     {
         choosenWord = arr[Random.Range(0, arr.Length)];
         wordToFindField.text = "";
+        hiddenWord = "";
         timeField.text = "0.0";
-
-        for (int i = 0; i < hiddenWord.Length; i++)
+        for (int i = 0; i < choosenWord.Length; i++)
         {
-            wordToFindField.text += "_ ";
-        }
-        
-        
+            if(choosenWord[i] == ' ' ) {hiddenWord += " ";}  else {hiddenWord += "-";}
+        } 
+        wordToFindField.text = hiddenWord;
     }
 
     // Update is called once per frame
@@ -35,5 +34,10 @@ public class GameController : MonoBehaviour
         time += Time.deltaTime; //Time.deltaTime is the time between frames
         timeField.text = time.ToString();
     }
-
+    private void OnGUI(){
+        Event e = Event.current;
+        if(e.type == EventType.KeyDown && e.keyCode.ToString().Length == 1){
+            Debug.Log("Key down event is triggered: " + e.keyCode.ToString());
+        }
+    }
 }
